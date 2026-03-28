@@ -5,16 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/urfave/cli/v3"
+	esphome "github.com/richard87/esphome-apiclient"
 )
 
-func runEntitiesCmd(ctx context.Context, cmd *cli.Command) error {
-	client, err := getClient(ctx, cmd)
-	if err != nil {
-		return err
-	}
-	defer client.Close()
-
+func runEntities(ctx context.Context, client *esphome.Client) error {
 	entities, err := client.ListEntities()
 	if err != nil {
 		return fmt.Errorf("failed to list entities: %w", err)

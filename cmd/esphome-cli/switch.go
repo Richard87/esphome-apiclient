@@ -7,19 +7,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/urfave/cli/v3"
+	esphome "github.com/richard87/esphome-apiclient"
 )
 
-func runSwitchCmd(ctx context.Context, cmd *cli.Command) error {
-	client, err := getClient(ctx, cmd)
-	if err != nil {
-		return err
-	}
-	defer client.Close()
-
-	key := uint32(cmd.Uint("switch-key"))
-	stateStr := cmd.String("switch-state")
-
+func runSwitch(ctx context.Context, client *esphome.Client, key uint32, stateStr string) error {
 	if key == 0 {
 		// List available switches
 		if _, err := client.ListEntities(); err != nil {

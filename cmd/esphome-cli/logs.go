@@ -5,23 +5,16 @@ import (
 	"fmt"
 	"strings"
 
+	esphome "github.com/richard87/esphome-apiclient"
 	"github.com/richard87/esphome-apiclient/pb"
-	"github.com/urfave/cli/v3"
 )
 
-func runLogsCmd(ctx context.Context, cmd *cli.Command) error {
-	client, err := getClient(ctx, cmd)
-	if err != nil {
-		return err
-	}
-	defer client.Close()
-
-	levelStr := cmd.String("level")
+func runLogs(ctx context.Context, client *esphome.Client, levelStr string) error {
 	level := parseLogLevel(levelStr)
 
 	fmt.Printf("Streaming logs (level >= %s, press Ctrl+C to stop)...\n\n", levelStr)
 
-	_, err = client.SubscribeLogs(level, func(msg *pb.SubscribeLogsResponse) {
+	_, err := client.SubscribeLogs(level, func(msg *pb.SubscribeLogsResponse) {
 		levelName := logLevelName(msg.Level)
 		text := string(msg.Message)
 		// Remove trailing newline if present

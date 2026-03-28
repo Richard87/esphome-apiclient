@@ -4,16 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/urfave/cli/v3"
+	esphome "github.com/richard87/esphome-apiclient"
 )
 
-func runInfoCmd(ctx context.Context, cmd *cli.Command) error {
-	client, err := getClient(ctx, cmd)
-	if err != nil {
-		return err
-	}
-	defer client.Close()
-
+func runInfo(ctx context.Context, client *esphome.Client) error {
 	info, err := client.DeviceInfo()
 	if err != nil {
 		return fmt.Errorf("failed to get device info: %w", err)

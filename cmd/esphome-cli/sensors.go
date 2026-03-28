@@ -6,17 +6,10 @@ import (
 
 	esphome "github.com/richard87/esphome-apiclient"
 	"github.com/richard87/esphome-apiclient/pb"
-	"github.com/urfave/cli/v3"
 	"google.golang.org/protobuf/proto"
 )
 
-func runSensorsCmd(ctx context.Context, cmd *cli.Command) error {
-	client, err := getClient(ctx, cmd)
-	if err != nil {
-		return err
-	}
-	defer client.Close()
-
+func runSensors(ctx context.Context, client *esphome.Client) error {
 	// First list entities to populate the registry
 	if _, err := client.ListEntities(); err != nil {
 		return fmt.Errorf("failed to list entities: %w", err)
@@ -25,7 +18,7 @@ func runSensorsCmd(ctx context.Context, cmd *cli.Command) error {
 	fmt.Println("Streaming sensor values (press Ctrl+C to stop)...")
 	fmt.Println()
 
-	_, err = client.SubscribeStates(func(msg proto.Message) {
+	_, err := client.SubscribeStates(func(msg proto.Message) {
 		reg := client.Entities()
 		switch m := msg.(type) {
 		case *pb.SensorStateResponse:

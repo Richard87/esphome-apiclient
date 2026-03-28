@@ -8,14 +8,9 @@ import (
 	"time"
 
 	"github.com/miekg/dns"
-	"github.com/urfave/cli/v3"
 )
 
-func runScanCmd(ctx context.Context, cmd *cli.Command) error {
-	timeout := cmd.Root().Duration("timeout")
-	if timeout == 0 {
-		timeout = 5 * time.Second
-	}
+func runScan(ctx context.Context, timeout time.Duration) error {
 
 	// mDNS multicast address
 	maddr, err := net.ResolveUDPAddr("udp4", "224.0.0.251:5353")
