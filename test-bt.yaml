@@ -1,0 +1,24 @@
+esphome:
+  name: test-bt
+  friendly_name: test-bt
+
+esp32:
+  board: esp32doit-devkit-v1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+# Enable Bluetooth Proxy (Active mode allows connections/GATT)
+bluetooth_proxy:
+  active: true

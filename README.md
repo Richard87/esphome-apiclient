@@ -151,9 +151,29 @@ func main() {
         fmt.Printf("[%s] %s\n", msg.Level, msg.Message)
     })
 
+    // Bluetooth Proxy (Phase 13)
+    client.SubscribeBluetoothAdvertisements(func(msg proto.Message) {
+        if adv, ok := msg.(*pb.BluetoothLERawAdvertisementsResponse); ok {
+            fmt.Printf("BLE adv: %d devices\n", len(adv.Advertisements))
+        }
+    })
+
     <-ctx.Done()
 }
 ```
+
+## Bluetooth Proxy (Experimental)
+
+ESPHome devices can act as Bluetooth proxies. The client supports:
+
+- **Advertisements**: `SubscribeBluetoothAdvertisements(handler)`
+- **Connections**: `BluetoothConnect(address)`, `BluetoothDisconnect(address)`
+- **GATT**: `BluetoothGATTGetServices(address)`, `BluetoothGATTRead(address, handle)`, `BluetoothGATTWrite(address, handle, data, response)`, `BluetoothGATTNotify(address, handle, enable, handler)`
+- **Scanner**: `BluetoothScannerSetMode(mode)`
+- **Capacity**: `SubscribeBluetoothConnectionsFree(handler)`
+
+> Experimental:
+> I dont have any use for Bluetooth Proxy at the moment, so this is experimental until further notice. If you use it, and it works for you (or not), please let me know!
 
 ## Protocol
 
