@@ -45,44 +45,54 @@ A bundled CLI (`cmd/esphome-cli`) lets you quickly interact with ESPHome devices
 
 ### Install
 
+To install the CLI utility, run:
+
 ```sh
 go install github.com/richard87/esphome-apiclient/cmd/esphome-cli@latest
 ```
 
+Ensure your `GOBIN` directory (usually `$HOME/go/bin`) is in your `PATH`.
+
 ### Usage
 
+The CLI uses subcommands for different operations. Global flags (address, yaml, key, etc.) should be placed before the subcommand or after it (flags are inherited).
+
 ```sh
+# Scan for devices on the local network
+esphome-cli scan
+
 # Connect using an ESPHome YAML config (derives address and encryption key automatically)
-esphome-cli --yaml device.yaml --mode sensors
+esphome-cli --yaml device.yaml info
 
 # Or specify address and key directly
-esphome-cli --address mydevice.local:6053 --key "base64-noise-psk" --mode logs
+esphome-cli --address mydevice.local:6053 --key "base64-noise-psk" logs
 
-# Available modes:
+# Available subcommands:
+#   scan       — scan for ESPHome devices on local network
 #   info       — print device info (name, MAC, ESPHome version, etc.)
 #   entities   — list all entities (sensors, switches, lights, services, etc.)
 #   sensors    — stream live sensor/switch/binary sensor state updates
-#   logs       — stream device logs (--log-level DEBUG|INFO|WARN|ERROR|VERBOSE)
-#   switch     — toggle a switch (--switch-key 0x1234 --switch-state on|off)
+#   logs       — stream device logs (--level DEBUG|INFO|WARN|ERROR|VERBOSE)
+#   switch     — control/list switches (--switch-key 0x1234 --switch-state on|off)
 ```
 
 ### Examples
 
 ```sh
 # Show device info
-esphome-cli --yaml device.yaml --mode info
+esphome-cli --yaml device.yaml info
 
 # Stream sensor values
-esphome-cli --yaml device.yaml --mode sensors
+esphome-cli --yaml device.yaml sensors
 
 # Stream logs at INFO level
-esphome-cli --yaml device.yaml --mode logs --log-level INFO
+esphome-cli --yaml device.yaml logs --level INFO
 
 # List available switches (omit --switch-key to list them)
-esphome-cli --yaml device.yaml --mode switch
+esphome-cli --yaml device.yaml switch
 
 # Turn a switch on
-esphome-cli --yaml device.yaml --mode switch --switch-key 0xABCD1234 --switch-state on
+esphome-cli --yaml device.yaml switch --switch-key 0xABCD1234 --switch-state on
 ```
 
 ## Library Usage
