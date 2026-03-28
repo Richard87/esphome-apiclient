@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-func runSensors(ctx context.Context, client *esphome.Client) error {
+func RunSensors(ctx context.Context, client *esphome.Client) error {
 	// First list entities to populate the registry
 	if _, err := client.ListEntities(); err != nil {
 		return fmt.Errorf("failed to list entities: %w", err)

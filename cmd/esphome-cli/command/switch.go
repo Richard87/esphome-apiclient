@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	esphome "github.com/richard87/esphome-apiclient"
 )
 
-func runSwitch(ctx context.Context, client *esphome.Client, key uint32, stateStr string) error {
+func RunSwitch(ctx context.Context, client *esphome.Client, key uint32, stateStr string) error {
 	if key == 0 {
 		// List available switches
 		if _, err := client.ListEntities(); err != nil {

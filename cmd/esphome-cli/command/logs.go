@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 	"github.com/richard87/esphome-apiclient/pb"
 )
 
-func runLogs(ctx context.Context, client *esphome.Client, levelStr string) error {
+func RunLogs(ctx context.Context, client *esphome.Client, levelStr string) error {
 	level := parseLogLevel(levelStr)
 
 	fmt.Printf("Streaming logs (level >= %s, press Ctrl+C to stop)...\n\n", levelStr)

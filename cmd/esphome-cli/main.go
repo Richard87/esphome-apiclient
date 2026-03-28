@@ -10,6 +10,7 @@ import (
 	"time"
 
 	esphome "github.com/richard87/esphome-apiclient"
+	"github.com/richard87/esphome-apiclient/cmd/esphome-cli/command"
 	"github.com/urfave/cli/v3"
 )
 
@@ -55,7 +56,7 @@ func main() {
 						timeout = 5 * time.Second
 					}
 
-					return runScan(ctx, timeout)
+					return command.RunScan(ctx, timeout)
 				},
 			},
 			{
@@ -67,7 +68,7 @@ func main() {
 						return err
 					}
 					defer client.Close()
-					return runInfo(ctx, client)
+					return command.RunInfo(ctx, client)
 				},
 			},
 			{
@@ -79,7 +80,7 @@ func main() {
 						return err
 					}
 					defer client.Close()
-					return runEntities(ctx, client)
+					return command.RunEntities(ctx, client)
 				},
 			},
 			{
@@ -91,7 +92,7 @@ func main() {
 						return err
 					}
 					defer client.Close()
-					return runSensors(ctx, client)
+					return command.RunSensors(ctx, client)
 				},
 			},
 			{
@@ -110,7 +111,7 @@ func main() {
 						return err
 					}
 					defer client.Close()
-					return runLogs(ctx, client, c.String("level"))
+					return command.RunLogs(ctx, client, c.String("level"))
 				},
 			},
 			{
@@ -132,7 +133,7 @@ func main() {
 						return err
 					}
 					defer client.Close()
-					return runSwitch(ctx, client, uint32(c.Uint("switch-key")), c.String("switch-state"))
+					return command.RunSwitch(ctx, client, uint32(c.Uint("switch-key")), c.String("switch-state"))
 				},
 			},
 		},
@@ -156,7 +157,7 @@ func getClient(ctx context.Context, cmd *cli.Command) (*esphome.Client, error) {
 
 	// If YAML is provided, parse it
 	if yamlPath != "" {
-		cfg, err := parseYAML(yamlPath)
+		cfg, err := command.ParseYAML(yamlPath)
 		if err != nil {
 			return nil, fmt.Errorf("failed to parse YAML: %w", err)
 		}

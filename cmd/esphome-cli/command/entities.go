@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	esphome "github.com/richard87/esphome-apiclient"
 )
 
-func runEntities(ctx context.Context, client *esphome.Client) error {
+func RunEntities(ctx context.Context, client *esphome.Client) error {
 	entities, err := client.ListEntities()
 	if err != nil {
 		return fmt.Errorf("failed to list entities: %w", err)

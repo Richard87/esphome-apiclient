@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"fmt"
@@ -22,7 +22,7 @@ type ESPHomeConfig struct {
 	} `yaml:"wifi"`
 }
 
-func parseYAML(path string) (*ESPHomeConfig, error) {
+func ParseYAML(path string) (*ESPHomeConfig, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("read file: %w", err)

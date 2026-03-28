@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"github.com/miekg/dns"
 )
 
-func runScan(ctx context.Context, timeout time.Duration) error {
+func RunScan(ctx context.Context, timeout time.Duration) error {
 
 	// mDNS multicast address
 	maddr, err := net.ResolveUDPAddr("udp4", "224.0.0.251:5353")
