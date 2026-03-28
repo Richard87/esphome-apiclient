@@ -166,14 +166,14 @@ A phased approach to building the client, from bare TCP to a fully-featured libr
 
 > Goal: Support BLE operations through the ESPHome device.
 
-- [ ] `SubscribeBluetoothAdvertisements(handler func(*BluetoothLEAdvertisementResponse))`
-- [ ] `BluetoothConnect(address uint64) error` / `BluetoothDisconnect(address uint64) error`
-- [ ] GATT operations: `GATTGetServices`, `GATTRead`, `GATTWrite`, `GATTNotify`
-- [ ] Handle `BluetoothGATTErrorResponse` for error propagation
-- [ ] Connection slot management via `BluetoothConnectionsFree`
-- **🧪 TEST: GATT read** — mock server returns data for a handle, verify client returns it
-- **🧪 TEST: GATT error** — mock server returns error response, verify client surfaces the error
-- **🧪 TEST: Connection slots** — verify free/limit/allocated parsing
+- [x] `SubscribeBluetoothAdvertisements(handler func(proto.Message))`
+- [x] `BluetoothConnect(address uint64) error` / `BluetoothDisconnect(address uint64) error`
+- [x] GATT operations: `GATTGetServices`, `GATTRead`, `GATTWrite`, `GATTNotify`
+- [x] Handle `BluetoothGATTErrorResponse` for error propagation
+- [x] Connection slot management via `BluetoothConnectionsFree`
+- [x] **🧪 TEST: GATT read** — mock server returns data for a handle, verify client returns it ✅
+- [x] **🧪 TEST: GATT error** — mock server returns error response, verify client surfaces the error ✅
+- [x] **🧪 TEST: Connection slots** — verify free/limit/allocated parsing ✅
 
 ---
 
