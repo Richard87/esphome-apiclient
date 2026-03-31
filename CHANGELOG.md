@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Richard87/esphome-apiclient/compare/v1.1.0...v1.1.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* update .gitignore to include esphome-config ([36ec00d](https://github.com/Richard87/esphome-apiclient/commit/36ec00d2488fca67b9d0bd654f7b75a76ca155cd))
+
 ## [1.1.0](https://github.com/Richard87/esphome-apiclient/compare/v1.0.0...v1.1.0) (2026-03-28)
 
 
